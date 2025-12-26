@@ -7,7 +7,7 @@ import { projectTemplates } from "./projectTemplates.js";
 
 dotenv.config();
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -23,20 +23,12 @@ mongoose
   .connect(process.env.MONGODB_URI, {
     dbName: "projectmentor",
   })
-  .then(() => {
-    console.log("MongoDB connected successfully");
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-      console.log("MongoDB team management system ready! (No AI Mode)");
-    });
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    console.log("Starting server without MongoDB...");
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT} (without MongoDB)`);
-    });
-  });
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 // Mongoose schemas / models
 const teamSchema = new mongoose.Schema({
@@ -181,6 +173,11 @@ function pickTemplate({ domain, type, skillLevel }) {
 
 // ===== API ENDPOINTS =====
 
+// Root Route
+app.get("/", (req, res) => {
+  res.status(200).send("Project Mentor API is live!");
+});
+
 app.get("/test", (req, res) => {
   res.status(200).json({
     success: true,
@@ -240,7 +237,9 @@ app.post("/send-team-code", async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -386,7 +385,9 @@ app.post("/lock-project", async (req, res) => {
 
     // Send email
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -493,7 +494,9 @@ app.post("/teams/:teamCode/accept-member", async (req, res) => {
 
     // Send Welcome Email
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,

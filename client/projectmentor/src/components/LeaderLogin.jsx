@@ -16,7 +16,7 @@ const LeaderLogin = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/leader-login`, {
+            const res = await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/leader-login`, {
                 email,
                 teamCode
             });

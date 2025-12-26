@@ -43,7 +43,7 @@ const TeamCreation = () => {
 
         try {
             // 1. Create Team in DB
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/teams`, {
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams`, {
                 leaderId: user.uid,
                 teamName: teamName,
                 teamCode: code,
@@ -52,7 +52,7 @@ const TeamCreation = () => {
             });
 
             // 2. Send Code via Email
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/send-team-code`, {
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/send-team-code`, {
                 leaderEmail: user.email,
                 leaderName: leaderName || user.displayName,
                 teamName: teamName,

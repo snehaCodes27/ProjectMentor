@@ -20,7 +20,7 @@ const MemberJoin = () => {
         setSuccess('');
 
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/member-requests`, {
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/member-requests`, {
                 memberName,
                 memberEmail,
                 teamName,
@@ -39,7 +39,7 @@ const MemberJoin = () => {
         setSuccess('');
 
         try {
-            const loginRes = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/member-login`, {
+            const loginRes = await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/member-login`, {
                 email: memberEmail,
                 teamCode: teamCode
             });

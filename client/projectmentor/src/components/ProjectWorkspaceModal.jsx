@@ -36,21 +36,21 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
 
     const fetchTasks = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tasks/team/${teamCode}`);
+            const res = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/team/${teamCode}`);
             if (res.data.success) setTasks(res.data.tasks || []);
         } catch (err) { console.error(err); }
     };
 
     const fetchSubmissions = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/submissions/${teamCode}`);
+            const res = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/submissions/${teamCode}`);
             if (res.data.success) setSubmissions(res.data.submissions);
         } catch (err) { console.error(err); }
     };
 
     const fetchMessages = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/messages/${teamCode}`);
+            const res = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages/${teamCode}`);
             if (res.data.success) setMessages(res.data.messages);
         } catch (err) { console.error(err); }
     };
@@ -68,7 +68,7 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
                 deadline: taskDeadline,
                 phase: taskPhase
             };
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/tasks`, newTask);
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks`, newTask);
             alert('Task assigned!');
             setTaskTitle(''); setTaskDesc(''); setAssignedMember(''); setTaskDeadline('');
             fetchTasks();
@@ -80,7 +80,7 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
     const handleDeleteTask = async (taskId) => {
         if (!window.confirm("Delete this task?")) return;
         try {
-            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/tasks/${taskId}`);
+            await axios.delete(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/${taskId}`);
             fetchTasks();
         } catch (err) { alert("Failed to delete task"); }
     };
@@ -92,7 +92,7 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
         if (newDesc === null) return;
 
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/tasks/${task._id}`, { title: newTitle, description: newDesc });
+            await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/${task._id}`, { title: newTitle, description: newDesc });
             fetchTasks();
         } catch (err) { alert("Failed to update task"); }
     };
@@ -103,7 +103,7 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
         e.preventDefault();
         if (!chatMsg.trim()) return;
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/messages`, {
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages`, {
                 teamCode,
                 sender: { name: 'Leader (You)', email: 'leader@admin.com' }, // In real app, get from auth context
                 content: chatMsg
@@ -114,13 +114,13 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
     };
 
     const handlePinMessage = async (msgId) => {
-        try { await axios.put(`${import.meta.env.VITE_API_BASE_URL}/messages/${msgId}/pin`); fetchMessages(); }
+        try { await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages/${msgId}/pin`); fetchMessages(); }
         catch (err) { alert("Failed to pin"); }
     };
 
     const handleDeleteMessage = async (msgId) => {
         if (!window.confirm("Delete this message?")) return;
-        try { await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/messages/${msgId}`); fetchMessages(); }
+        try { await axios.delete(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages/${msgId}`); fetchMessages(); }
         catch (err) { alert("Failed to delete"); }
     };
 
@@ -162,22 +162,40 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
                         {/* Task Creation Form */}
                         <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '2rem', border: '1px solid var(--accent-color)' }}>
                             <h3>➕ Create New Task</h3>
-                            <form onSubmit={handleCreateTask} style={{ display: 'grid', gap: '10px' }}>
-                                <input placeholder="Task Title" value={taskTitle} onChange={e => setTaskTitle(e.target.value)} required style={{ padding: '8px' }} />
-                                <textarea placeholder="Description" value={taskDesc} onChange={e => setTaskDesc(e.target.value)} required style={{ padding: '8px' }} />
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
-                                    <select value={assignedMember} onChange={e => setAssignedMember(e.target.value)} style={{ padding: '8px' }}>
-                                        <option value="">Assign Member (Optional)</option>
-                                        {members.map(m => <option key={m.email} value={JSON.stringify(m)}>{m.name}</option>)}
-                                    </select>
-                                    <input type="date" value={taskDeadline} onChange={e => setTaskDeadline(e.target.value)} style={{ padding: '8px' }} />
-                                    <select value={taskPhase} onChange={e => setTaskPhase(e.target.value)} style={{ padding: '8px' }}>
-                                        <option>Phase 1</option>
-                                        <option>Phase 2</option>
-                                        <option>Phase 3</option>
-                                    </select>
+                            <form onSubmit={handleCreateTask} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                                <input placeholder="Task Title" value={taskTitle} onChange={e => setTaskTitle(e.target.value)} required style={{ padding: '10px' }} />
+                                <textarea placeholder="Description" value={taskDesc} onChange={e => setTaskDesc(e.target.value)} required style={{ padding: '10px', minHeight: '80px' }} />
+
+                                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+                                    <div style={{ flex: 1, minWidth: '200px' }}>
+                                        <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9rem', color: '#666' }}>Assign To:</label>
+                                        <select value={assignedMember} onChange={e => setAssignedMember(e.target.value)} style={{ width: '100%', padding: '10px' }}>
+                                            <option value="">-- Unassigned --</option>
+                                            {members.map(m => <option key={m.email} value={JSON.stringify(m)}>{m.name}</option>)}
+                                        </select>
+                                    </div>
+
+                                    <div style={{ flex: 1, minWidth: '200px' }}>
+                                        <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9rem', color: '#666' }}>Deadline:</label>
+                                        <input
+                                            type="date"
+                                            value={taskDeadline}
+                                            onChange={(e) => setTaskDeadline(e.target.value)}
+                                            style={{ width: '100%', padding: '10px' }}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div style={{ flex: 1, minWidth: '200px' }}>
+                                        <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9rem', color: '#666' }}>Phase:</label>
+                                        <select value={taskPhase} onChange={e => setTaskPhase(e.target.value)} style={{ width: '100%', padding: '10px' }}>
+                                            <option>Phase 1</option>
+                                            <option>Phase 2</option>
+                                            <option>Phase 3</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <button className="btn-primary">Assign Task</button>
+                                <button className="btn-primary" style={{ alignSelf: 'flex-start', padding: '10px 30px' }}>+ Assign Task</button>
                             </form>
                         </div>
                         {/* Tasks List */}
@@ -314,90 +332,85 @@ const ProjectWorkspaceModal = ({ show, onClose, teamCode, projectDetails, initia
             }}>
                 <style>
                     {`
-                        @media (min-width: 768px) {
-                            .workspace-container {
-                                flex-direction: row !important;
-                            }
-                            .workspace-sidebar {
-                                width: 250px !important;
-                                height: 100% !important;
-                                border-right: 1px solid var(--accent-color) !important;
-                                border-bottom: none !important;
-                                overflow-y: auto !important;
-                            }
-                            .workspace-content {
-                                height: 100% !important;
-                            }
+                        .workspace-sidebar button {
+                            margin-bottom: 10px;
+                            width: 100%;
+                            text-align: left;
+                            padding: 12px 15px;
+                            border-radius: 8px;
+                            transition: all 0.2s;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            font-size: 1rem;
+                        }
+                        .workspace-sidebar button:hover {
+                            background: rgba(20, 184, 166, 0.1) !important;
+                            transform: translateX(5px);
                         }
                     `}
                 </style>
-                <div className="workspace-container" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <div className="workspace-container" style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
                     {/* Sidebar */}
                     <div className="workspace-sidebar" style={{
-                        width: '100%', height: 'auto', background: 'rgba(255, 255, 255, 0.1)',
-                        borderBottom: '1px solid var(--accent-color)', display: 'flex', flexDirection: 'column',
-                        padding: '1rem', overflowX: 'auto'
+                        width: '250px', height: '100%', background: 'rgba(255, 255, 255, 0.5)',
+                        borderRight: '1px solid var(--accent-color)', display: 'flex', flexDirection: 'column',
+                        padding: '1.5rem', overflowY: 'auto'
                     }}>
-                        <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)', textAlign: 'center', display: 'none' }}>Workspace</h3>
-                        <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '5px' }}>
-                            {/* Mobile Header / Title could go here if needed */}
+                        <h3 style={{ marginBottom: '1.5rem', color: 'var(--primary-color)', textAlign: 'center' }}>Workspace</h3>
 
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                             <button
                                 onClick={() => setActiveTab('details')}
                                 style={{
                                     background: activeTab === 'details' ? 'var(--primary-color)' : 'transparent',
-                                    color: activeTab === 'details' ? 'white' : 'var(--primary-color)',
-                                    border: 'none', padding: '8px 12px', borderRadius: '5px', cursor: 'pointer', whiteSpace: 'nowrap', fontWeight: 'bold'
+                                    color: activeTab === 'details' ? 'white' : '#555',
+                                    border: 'none', fontWeight: '600'
                                 }}
                             >
-                                ℹ️ Details
+                                ℹ️ Project Details
                             </button>
                             <button
                                 onClick={() => setActiveTab('tasks')}
                                 style={{
                                     background: activeTab === 'tasks' ? 'var(--primary-color)' : 'transparent',
-                                    color: activeTab === 'tasks' ? 'white' : 'var(--primary-color)',
-                                    border: 'none', padding: '8px 12px', borderRadius: '5px', cursor: 'pointer', whiteSpace: 'nowrap', fontWeight: 'bold'
+                                    color: activeTab === 'tasks' ? 'white' : '#555',
+                                    border: 'none', fontWeight: '600'
                                 }}
                             >
-                                ✅ Tasks
+                                🗂️ Tasks & Roadmap
                             </button>
-
                             <button
                                 onClick={() => setActiveTab('chat')}
                                 style={{
                                     background: activeTab === 'chat' ? 'var(--primary-color)' : 'transparent',
-                                    color: activeTab === 'chat' ? 'white' : 'var(--primary-color)',
-                                    border: 'none', padding: '8px 12px', borderRadius: '5px', cursor: 'pointer', whiteSpace: 'nowrap', fontWeight: 'bold'
+                                    color: activeTab === 'chat' ? 'white' : '#555',
+                                    border: 'none', fontWeight: '600'
                                 }}
                             >
-                                💬 Chat
+                                💬 Team Chat
                             </button>
                             <button
                                 onClick={() => setActiveTab('submitted')}
                                 style={{
                                     background: activeTab === 'submitted' ? 'var(--primary-color)' : 'transparent',
-                                    color: activeTab === 'submitted' ? 'white' : 'var(--primary-color)',
-                                    border: 'none', padding: '8px 12px', borderRadius: '5px', cursor: 'pointer', whiteSpace: 'nowrap', fontWeight: 'bold'
+                                    color: activeTab === 'submitted' ? 'white' : '#555',
+                                    border: 'none', fontWeight: '600'
                                 }}
                             >
-                                📥 Subs
+                                📥 Submissions
+                            </button>
+
+                            <hr style={{ margin: '1rem 0', borderColor: '#eee' }} />
+
+                            <button onClick={onClose} style={{ background: '#fee2e2', color: '#dc2626', border: 'none', fontWeight: '600' }}>
+                                🚪 Close Workspace
                             </button>
                         </div>
                     </div>
 
                     {/* Main Content */}
-                    <div className="workspace-content" style={{ flex: 1, padding: '1.5rem', overflowY: 'auto' }}>
-                        <button
-                            onClick={onClose}
-                            style={{
-                                position: 'absolute', top: '10px', right: '10px',
-                                background: '#ff6b6b', color: 'white', border: 'none',
-                                borderRadius: '50%', width: '30px', height: '30px', cursor: 'pointer', fontWeight: 'bold', zIndex: 10
-                            }}
-                        >
-                            ✕
-                        </button>
+                    <div className="workspace-content" style={{ flex: 1, padding: '2rem', overflowY: 'auto', position: 'relative' }}>
 
                         {renderContent()}
                     </div>

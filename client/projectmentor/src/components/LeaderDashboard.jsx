@@ -48,7 +48,7 @@ const LeaderDashboard = () => {
         if (!teamCode) return;
 
         // Fetch Project Status
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/projects/team/${teamCode}`)
+        axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/projects/team/${teamCode}`)
             .then(res => {
                 if (res.data.success && res.data.project) {
                     setProjectDetails(res.data.project);
@@ -62,12 +62,12 @@ const LeaderDashboard = () => {
             .catch(err => console.error("Error fetching project:", err));
 
         // Fetch Tasks
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/tasks/team/${teamCode}`)
+        axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/team/${teamCode}`)
             .then(res => res.data.success && setTasks(res.data.tasks || []))
             .catch(console.error);
 
         // Fetch Members
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}`)
+        axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}`)
             .then(res => res.data.success && setMembers(res.data.team.members || []))
             .catch(console.error);
 
@@ -76,11 +76,11 @@ const LeaderDashboard = () => {
     const fetchMembersAndRequests = async () => {
         try {
             // Fetch requests
-            const reqRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/member-requests/${teamCode}`);
+            const reqRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/member-requests/${teamCode}`);
             setRequests(reqRes.data.requests);
 
             // Fetch team details for members
-            const teamRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}`);
+            const teamRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}`);
             setMembers(teamRes.data.team.members || []);
         } catch (err) {
             console.error(err);
@@ -91,7 +91,7 @@ const LeaderDashboard = () => {
         setProjectLocked(true);
         setSelectedProject(title);
         // Refresh project details immediately
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/projects/team/${teamCode}`)
+        axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/projects/team/${teamCode}`)
             .then(r => r.data.success && setProjectDetails(r.data.project));
     };
 

@@ -11,7 +11,7 @@ const ManageTeamModal = ({ show, onClose, teamName, teamCode, requests, members,
 
     const handleAccept = async (requestId) => {
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}/accept-member`, { requestId });
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}/accept-member`, { requestId });
             fetchMembersAndRequests(); // Refresh
         } catch (err) {
             alert(err.response?.data?.error || "Failed to accept");
@@ -20,7 +20,7 @@ const ManageTeamModal = ({ show, onClose, teamName, teamCode, requests, members,
 
     const handleReject = async (requestId) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/member-requests/${requestId}/reject`);
+            await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/member-requests/${requestId}/reject`);
             fetchMembersAndRequests(); // Refresh
         } catch (err) {
             alert("Failed to reject");
@@ -30,14 +30,14 @@ const ManageTeamModal = ({ show, onClose, teamName, teamCode, requests, members,
     const handleRemoveMember = async (email) => {
         if (!window.confirm("Are you sure you want to remove this member?")) return;
         try {
-            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}/members/${email}`);
+            await axios.delete(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}/members/${email}`);
             fetchMembersAndRequests();
         } catch (err) { alert("Failed to remove"); }
     };
 
     const handleMuteMember = async (email) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}/members/${email}/mute`);
+            await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}/members/${email}/mute`);
             fetchMembersAndRequests(); // Refresh to show new status
         } catch (err) { alert("Failed to update mute status"); }
     };

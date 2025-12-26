@@ -52,11 +52,11 @@ const MemberDashboard = () => {
         const fetchData = async () => {
             try {
                 // 1. Project
-                const pRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/projects/team/${teamCode}`);
+                const pRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/projects/team/${teamCode}`);
                 if (pRes.data.success) setProject(pRes.data.project);
 
                 // 2. Tasks
-                const tRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tasks/team/${teamCode}`);
+                const tRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/team/${teamCode}`);
                 if (tRes.data.success) {
                     const allTasks = tRes.data.tasks || [];
                     setTasks(allTasks);
@@ -65,11 +65,11 @@ const MemberDashboard = () => {
                 }
 
                 // 3. Submissions (for history)
-                const sRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/submissions/${teamCode}`);
+                const sRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/submissions/${teamCode}`);
                 if (sRes.data.success) setSubmissions(sRes.data.submissions);
 
                 // 4. Messages
-                const mRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/messages/${teamCode}`);
+                const mRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages/${teamCode}`);
                 if (mRes.data.success) setMessages(mRes.data.messages);
 
             } catch (err) {
@@ -89,7 +89,7 @@ const MemberDashboard = () => {
     // Actions
     const handleStartTask = async (taskId) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/tasks/${taskId}`, { status: 'in-progress' });
+            await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/${taskId}`, { status: 'in-progress' });
             // Refresh tasks locally
             setTasks(tasks.map(t => t._id === taskId ? { ...t, status: 'in-progress' } : t));
             setMyTasks(myTasks.map(t => t._id === taskId ? { ...t, status: 'in-progress' } : t));
@@ -99,7 +99,7 @@ const MemberDashboard = () => {
     const handleMarkDone = async (taskId) => {
         if (!window.confirm("Mark this task as completed?")) return;
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/tasks/${taskId}`, { status: 'completed' }); // Or 'submitted' if you prefer
+            await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/${taskId}`, { status: 'completed' }); // Or 'submitted' if you prefer
             // Refresh tasks locally
             setTasks(tasks.map(t => t._id === taskId ? { ...t, status: 'completed' } : t));
             setMyTasks(myTasks.map(t => t._id === taskId ? { ...t, status: 'completed' } : t));
@@ -109,7 +109,7 @@ const MemberDashboard = () => {
     const handleSubmitWork = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/submissions`, {
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/submissions`, {
                 teamCode,
                 member: { name: memberName, email },
                 workLink,
@@ -128,7 +128,7 @@ const MemberDashboard = () => {
         e.preventDefault();
         if (!chatMsg.trim()) return;
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/messages`, {
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages`, {
                 teamCode,
                 sender: { name: memberName, email },
                 content: chatMsg

@@ -29,10 +29,10 @@ const SettingsView = ({ teamCode, teamName, onClose }) => {
         try {
             // Fetch comprehensive data
             const [teamRes, taskRes, subRes, msgRes] = await Promise.all([
-                axios.get(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}`),
-                axios.get(`${import.meta.env.VITE_API_BASE_URL}/tasks/team/${teamCode}`),
-                axios.get(`${import.meta.env.VITE_API_BASE_URL}/submissions/${teamCode}`),
-                axios.get(`${import.meta.env.VITE_API_BASE_URL}/messages/${teamCode}`)
+                axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}`),
+                axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/tasks/team/${teamCode}`),
+                axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/submissions/${teamCode}`),
+                axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/messages/${teamCode}`)
             ]);
 
             const fullData = {

@@ -25,7 +25,7 @@ const GenerateProjectModal = ({ show, onClose, teamName, teamCode, onProjectLock
         }
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/generate-project`, {
+            const res = await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/generate-project`, {
                 domain,
                 type: projectType,
                 skillLevel,
@@ -53,7 +53,7 @@ const GenerateProjectModal = ({ show, onClose, teamName, teamCode, onProjectLock
         const user = auth.currentUser;
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/lock-project`, {
+            const res = await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/lock-project`, {
                 templateId: detailView.templateId,
                 teamId: teamCode,
                 projectName: detailView.title,

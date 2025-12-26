@@ -19,11 +19,11 @@ const ManageTeam = () => {
     const fetchMembersAndRequests = async () => {
         try {
             // Fetch requests
-            const reqRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/member-requests/${teamCode}`);
+            const reqRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/member-requests/${teamCode}`);
             setRequests(reqRes.data.requests);
 
             // Fetch team details for members
-            const teamRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}`);
+            const teamRes = await axios.get(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}`);
             setMembers(teamRes.data.team.members || []);
         } catch (err) {
             console.error(err);
@@ -33,7 +33,7 @@ const ManageTeam = () => {
 
     const handleAccept = async (requestId) => {
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/teams/${teamCode}/accept-member`, { requestId });
+            await axios.post(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/teams/${teamCode}/accept-member`, { requestId });
             fetchMembersAndRequests(); // Refresh
         } catch (err) {
             setError(err.response?.data?.error || "Failed to accept");
@@ -42,7 +42,7 @@ const ManageTeam = () => {
 
     const handleReject = async (requestId) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/member-requests/${requestId}/reject`);
+            await axios.put(`https://bored-lauraine-snehamatkar-8f7530b0.koyeb.app/member-requests/${requestId}/reject`);
             fetchMembersAndRequests(); // Refresh
         } catch (err) {
             setError("Failed to reject");
