@@ -1,0 +1,492 @@
+/* Premium Global Styles */
+:root {
+  --primary-color: #6D28D9;
+  /* Purple */
+  --secondary-color: #14B8A6;
+  /* Teal */
+  --app-bg: #F9FAFB;
+  /* Soft White */
+  --card-bg: #FFFFFF;
+  /* White */
+  --text-dark: #111827;
+  /* Charcoal */
+  --text-light: #6B7280;
+  /* Gray */
+  --success-color: #22C55E;
+  /* Green */
+  --warning-color: #FACC15;
+  /* Yellow */
+  --danger-color: #EF4444;
+  /* Red */
+
+  /* Mappings for existing components */
+  --accent-color: var(--secondary-color);
+  --glass-bg: var(--card-bg);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--app-bg);
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Dashboard Header Styles */
+.dashboard-header {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--accent-color);
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.header-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-divider {
+  padding-left: 3rem;
+  border-left: 2px solid #f0f0f0;
+}
+
+/* Ensure container scrolls properly */
+.splash-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--app-bg);
+  color: var(--text-dark);
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  box-sizing: border-box;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+  animation: bounce 2s infinite;
+}
+
+/* Add a hue-rotate filter to logo to match theme if needed, or keep original */
+.splash-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(109, 40, 217, 0.2));
+  /* Purple shadow */
+}
+
+.splash-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 3s infinite;
+}
+
+.splash-subtitle {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* General Card Styles */
+.glass-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+
+
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px -1px rgba(109, 40, 217, 0.4);
+}
+
+.btn-primary:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -1px rgba(20, 184, 166, 0.5);
+}
+
+.btn-secondary {
+  background: white;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-disabled {
+  background: #E5E7EB;
+  color: #9CA3AF;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Premium Form Inputs */
+input,
+select,
+textarea {
+  background: #FFFFFF !important;
+  border: 1px solid #D1D5DB !important;
+  color: var(--text-dark) !important;
+  padding: 12px 15px !important;
+  border-radius: 8px !important;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color) !important;
+  /* Simulating ring with box-shadow since 'ring' property is not standard CSS */
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+}
+
+/* Placeholder text color fix */
+input::placeholder {
+  color: var(--text-light);
+}
+
+/* Helper Classes */
+.text-success {
+  color: var(--success-color);
+}
+
+.text-warning {
+  color: var(--warning-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+/* Responsive Layout Helpers (Base/Desktop) */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.member-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.responsive-flex {
+  display: flex !important;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.responsive-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Base Mobile Responsiveness */
+@media (max-width: 768px) {
+
+  /* Splash & Containers */
+  .splash-container {
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .splash-title {
+    font-size: 2rem !important;
+    /* Smaller title */
+  }
+
+  .splash-logo {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  /* Cards & Modals - Force width to fit screen */
+  .glass-card {
+    padding: 1.5rem;
+    width: 92% !important;
+    /* Ensure it doesn't touch edges */
+    max-width: 100% !important;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Grid Resets */
+  .dashboard-grid,
+  .member-dashboard-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Flex Helpers */
+  .responsive-flex {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .responsive-nav {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+    padding: 1rem !important;
+  }
+
+  .responsive-nav>div[style*="display: flex"] {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .responsive-nav>div[style*="display: flex"]:last-child {
+    align-items: stretch;
+  }
+
+  /* Form Inputs */
+  input,
+  select,
+  textarea {
+    width: 100% !important;
+    /* Full width inputs */
+    font-size: 16px;
+    /* Prevent zoom on iOS */
+  }
+
+  /* Leader Dashboard Grid - Force single column */
+  div[style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Modal Content Overrides */
+  .modal-content-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Role Selection Cards & Flex items */
+  .responsive-flex>div {
+    width: 100% !important;
+    max-width: 300px;
+  }
+
+  /* Team Progress Card - Remove span 2 on mobile */
+  div[style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+
+  /* Navigation adjustments */
+  nav.glass-card {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  nav.glass-card>div {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Task cards */
+  div[style*="borderLeft: 4px solid orange"] {
+    padding: 0.75rem !important;
+  }
+
+  /* Chat container */
+  div[style*="height: 450px"] {
+    height: 300px !important;
+  }
+
+  /* Button adjustments */
+  button {
+    padding: 0.8em 1em;
+    font-size: 0.9em;
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Dashboard Header Mobile */
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1.5rem;
+    padding: 1.5rem !important;
+  }
+
+  .header-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .header-divider {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1rem;
+    width: 100%;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+}
+
+/* Tablet Responsiveness (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .splash-container {
+    padding: 2rem;
+  }
+
+  .glass-card {
+    width: 95%;
+    padding: 2rem;
+  }
+
+  /* Use 2 columns on tablet instead of squashed auto-fit */
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Member dashboard - adjust grid ratio */
+  .member-dashboard-grid {
+    grid-template-columns: 1.5fr 1fr !important;
+  }
+
+  /* Role selection cards */
+  .splash-container .responsive-flex>div {
+    width: 220px;
+  }
+
+  /* Navigation adjustments */
+  .responsive-nav {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Chat container */
+  div[style*="height: 450px"] {
+    height: 380px;
+  }
+
+  /* Team Progress - allow span 2 on tablet */
+  @media (min-width: 900px) {
+    div[style*="grid-column: span 2"] {
+      grid-column: span 2 !important;
+    }
+  }
+}
+
+/* Large Desktop Responsiveness (1025px+) */
+@media (min-width: 1025px) {
+  .splash-container {
+    padding: 2rem;
+  }
+
+  .glass-card {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Ensure proper grid layouts on large screens */
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  }
+}
