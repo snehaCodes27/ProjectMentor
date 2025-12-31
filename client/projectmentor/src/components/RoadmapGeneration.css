@@ -1,0 +1,551 @@
+.roadmap-loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    color: #1e293b;
+    text-align: center;
+}
+
+.calendar-spinner {
+    margin-bottom: 2rem;
+    color: #2563eb;
+}
+
+.floating-calendar {
+    animation: floatCalendar 3s ease-in-out infinite;
+    filter: drop-shadow(0 10px 15px rgba(37, 99, 235, 0.3));
+}
+
+@keyframes floatCalendar {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+.loading-txt {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.loading-subtxt {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+/* CONTAINER */
+.roadmap-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.roadmap-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 4rem;
+    position: relative;
+}
+
+.roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 24px;
+    bottom: 100px;
+    width: 2px;
+    background: linear-gradient(to bottom, #3b82f6, #e2e8f0);
+    z-index: 0;
+}
+
+/* PHASE CARD */
+.roadmap-phase-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    padding: 1.5rem;
+    margin-left: 3rem;
+    /* Space for timeline line */
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s;
+}
+
+.roadmap-phase-card:hover {
+    transform: translateX(5px);
+    border-color: #3b82f6;
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.1);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.8rem;
+}
+
+.phase-title-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* PHASE NUMBER (CIRCLE ON LINE) */
+.phase-index {
+    position: absolute;
+    left: -4.5rem;
+    /* Moves circle onto the timeline line */
+    width: 48px;
+    height: 48px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 6px #eff6ff;
+    z-index: 2;
+}
+
+.phase-header h3 {
+    font-size: 1.3rem;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.phase-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* TASKS LIST */
+.phase-tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+}
+
+.task-title {
+    font-size: 1rem;
+    color: #334155;
+    font-weight: 600;
+    margin: 0;
+}
+
+.task-badges {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.task-time-badge {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 1px solid #e2e8f0;
+}
+
+.task-goal-badge {
+    background: #dcfce7;
+    color: #166534;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid #b7f4cf;
+}
+
+.task-meta-row {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.meta-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.output-meta {
+    color: #475569;
+    font-weight: 500;
+}
+
+/* ACTIONS */
+.roadmap-actions {
+    margin-left: 3rem;
+    margin-top: 2rem;
+    background: #1e293b;
+    padding: 2rem;
+    border-radius: 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.lock-text {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #cbd5e1;
+    font-size: 1rem;
+}
+
+.btn-lock-roadmap {
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-lock-roadmap:hover {
+    background: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+}
+
+/* CONFIDENCE SCORE & FAILURE PREDICTOR - COMPACT VERSION */
+.roadmap-analysis-compact {
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.analysis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.analysis-header:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.analysis-summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.score-badge-inline {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.analysis-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.divider {
+    color: #94a3b8;
+    font-weight: bold;
+}
+
+.risk-badge-inline {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.risk-badge-inline.risk-low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.risk-badge-inline.risk-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risk-badge-inline.risk-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.analysis-details-compact {
+    border-top: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.compact-section h4 {
+    font-size: 0.9rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.compact-text {
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.compact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.compact-list li {
+    font-size: 0.8rem;
+    color: #334155;
+    line-height: 1.4;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.compact-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+/* COMPACT PHASE CARDS */
+.phases-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.roadmap-phase-card-compact {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    margin-left: 3rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+}
+
+.roadmap-phase-card-compact:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.phase-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.phase-header-compact:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.phase-header-compact .phase-title-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.phase-header-compact .phase-index {
+    position: relative;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    flex-shrink: 0;
+}
+
+.phase-header-compact h3 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin: 0 0 0.3rem 0;
+}
+
+.phase-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.phase-tasks-list-compact {
+    padding: 0 1.5rem 1rem 1.5rem;
+    overflow: hidden;
+}
+
+.task-item-compact {
+    background: #f8fafc;
+    border-left: 3px solid #3b82f6;
+    padding: 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+}
+
+.task-item-compact:last-child {
+    margin-bottom: 0;
+}
+
+.task-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.task-header-compact h4 {
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+}
+
+.task-time {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.task-goal {
+    font-size: 0.85rem;
+    color: #475569;
+    margin: 0 0 0.6rem 0;
+    line-height: 1.4;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: #64748b;
+    flex-wrap: wrap;
+}
+
+.task-tools,
+.task-output {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    .roadmap-analysis-compact,
+    .roadmap-phase-card-compact {
+        margin-left: 0;
+    }
+
+    .compact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .task-footer {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+}

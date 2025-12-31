@@ -1,0 +1,232 @@
+.manage-team-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.manage-team-card .modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-text .modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.header-text .modal-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 4px 0 0;
+}
+
+.members-list-container {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.member-row {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.member-row:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.leader-row {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.member-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: var(--text-secondary);
+}
+
+.crown-icon {
+    color: #cca400;
+    /* Goldish */
+    fill: #ffd700;
+}
+
+.member-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.member-email {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.member-role,
+.member-status {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: capitalize;
+}
+
+.member-role {
+    color: #bfa100;
+    font-weight: 600;
+}
+
+.member-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+}
+
+.promote-btn {
+    color: #eab308;
+    background: rgba(234, 179, 8, 0.1);
+}
+
+.promote-btn:hover {
+    background: #eab308;
+    color: white;
+}
+
+.remove-btn {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.remove-btn:hover {
+    background: #ef4444;
+    color: white;
+}
+
+.no-members-msg {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Status Messages */
+.status-msg {
+    margin: 10px 20px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.status-msg.success {
+    background: #ecfdf5;
+    /* Green */
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+
+.status-msg.error {
+    background: #fef2f2;
+    /* Red */
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* Confirm Overlay */
+.confirm-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.confirm-box {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 80%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.confirm-box h3 {
+    margin: 0 0 10px;
+    color: var(--text-primary);
+}
+
+.confirm-box p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-secondary.small,
+.btn-primary.small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
